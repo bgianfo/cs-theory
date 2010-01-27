@@ -1,0 +1,113 @@
+\documentclass[11pt]{article}
+
+\oddsidemargin0cm
+\topmargin-2cm     %I recommend adding these three lines to increase the 
+\textwidth16.5cm   %amount of usable space on the page (and save trees)
+\textheight23.5cm  
+
+\newcommand{\question}[2] {\vspace{.25in} \fbox{#1} #2 \vspace{.10in}}
+\renewcommand{\part}[1] {\vspace{.10in} {\bf (#1)}}
+
+\usepackage{graphicx}
+\usepackage{amssymb,amsmath}
+
+\begin{document}
+
+\medskip                        % Skip a "medium" amount of space
+                                % (latex determines what medium is)
+                                % Also try: \bigskip, \littleskip
+
+
+\begin{center}                  % Center the following lines
+  {\Large Introduction to the Theory of Computation \\ Homework \#4} \\
+  Brian Gianforcaro \\
+  \date \\
+\end{center}
+
+\ttfamily
+
+\question{1}{Sipser: 1.15}
+ 
+\part{a} The states of N are the states of N1. 
+\begin{center}
+  \begin{itemize}
+    \item $N_1 = (Q_1,\Sigma,{\delta}_1,q_1, F_1 = \{ q_1 \}) $
+  \end{itemize}
+\end{center}
+
+
+\part{b} The start state of N is the same as the start state of N1. 
+\begin{center}
+  \begin{itemize}
+    \item ${\delta}_1(q1,\epsilon) = q1 $
+    \item ${\delta}_1(q1, x \in \Sigma ) = q1 $
+    \item $N_1 = (Q_1,\Sigma,{\delta}_1,q_1, F_1) $
+  \end{itemize}
+\end{center}
+
+
+\part{c} $F =\{q\}\cup F_1$.  The accept states F are the old accept states plus its start state. 
+\begin{center}
+  \begin{itemize}
+    \item ${\delta}_1(q2,\epsilon) = q2 $
+    \item ${\delta}_1(q2, x \in \Sigma ) = q2 $
+    \item $N_1 = (Q_1,\Sigma,{\delta}_1, q1, F_1 = \{ q2 \} ) $
+  \end{itemize}
+\end{center}
+
+\part{d} Define $\delta$ so that for any $q \in Q$ and any $a \in \Sigma$, 
+\begin{center}
+  \begin{itemize}
+    \item $N_1 = (Q_1,\Sigma,{\delta}_1,q_1, F_1) $
+  \end{itemize}
+\end{center}
+
+\question{2}{Proof: By Contradiction}
+\begin{center}
+  \begin{itemize}
+    \item Suppose $A_2 = $ \{ $ www | w \in \{a,b\}^* $ \}  is regular.
+    \item Then the pumping lemma applies, and there exists a number n so that any $x \in A_2$ can be pumped.
+    \item Pick $x = a^n b a^n b a^n b $ and $ y = b^m $
+    \item Since $|x| \geq n$, it follows that $y = uvw$, $|v| \geq 1$, $x(0) \in A_2$. 
+    \item Clearly v is a string of a's.
+    \item Hence $x(0) = a^{n-|v|} b a^n b a^n b$
+    \item But, since $n \ne  n-|v|$, $x(0) \notin A_2$.
+    \item Since $x(0) \in A_2$ and $x(0) \notin A_2$ are contradictory,
+    \item L regular can not be the case.
+  \end{itemize}
+\end{center}
+
+\indent $\Box$
+
+\pagebreak 
+
+\question{3}{Proof: By Contradiction}
+\begin{center}
+  \begin{itemize}
+    \item Suppose $L = $ \{ $a^i b^k | 2k \leq i \leq 3k $ \}  is regular.
+    \item Then the pumping lemma applies, and there exists a number n so that any $x \in L$ can be pumped.
+    \item Pick $x = a^n $ and $ y = b^m $
+    \item Since $|x| \geq n$, it follows that $y = uvw$, $|v| \geq 1$, $x(0) \in L$. 
+    \item Clearly v is a string of a's.
+    \item Hence $x(0) = a^n b^{m-|v|}$
+    \item But, since $m \ne  m-|v|$, $x(0) \notin L$.
+    \item Since $x(0) \in L$ and $x(0) \notin L$ are contradictory,
+    \item L regular can not be the case.
+  \end{itemize}
+\end{center}
+
+\indent $\Box$
+
+\question{4}{}
+
+ \part{a} False, {${a,b}^*$} is regular, but it contains a non-regular subset \{$a^n b^n | n \geq 0 $\}
+
+ \part{b} False,  Non-regular languages have finite subsets, and finite languages are regular.
+
+ \part{c} Flase, the union of of a language and it's compliment is ${\Sigma}^{*}$ which is regular.
+
+ \part{d} Flase, A non-regular languages intersected with it's complement is empty, which is regular.
+
+ \part{e} False, ${L}_{2}$ could just be a subset of ${L}_{1}$.
+
+\end{document}

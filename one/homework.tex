@@ -1,0 +1,124 @@
+\documentstyle[11pt]{article}
+
+
+\oddsidemargin0cm
+\topmargin-2cm     %I recommend adding these three lines to increase the 
+\textwidth16.5cm   %amount of usable space on the page (and save trees)
+\textheight23.5cm  
+
+\newcommand{\question}[2] {\vspace{.25in} \fbox{#1} #2 \vspace{.10in}}
+\renewcommand{\part}[1] {\vspace{.10in} {\bf (#1)}}
+
+\begin{document}
+
+\medskip                        % Skip a "medium" amount of space
+                                % (latex determines what medium is)
+                                % Also try: \bigskip, \littleskip
+
+
+\begin{center}                  % Center the following lines
+  {\Large Introduction to the Theory of Computation \\ Homework \#1} \\
+  Brian Gianforcaro \\
+  \date \\
+\end{center}
+
+\ttfamily
+
+\question{1}{Write formal descriptions of the following sets:}
+
+% The set containing the numbers 1, 10, and 100 
+\part{a} $\{ x \in {\mathcal{N}} | x = 1 \wedge mod(x,10) = 0 \}$
+
+\part{b} $\{ x \in {\mathcal{N}} | x > 5 \}$
+
+\part{c} $\{ x \in {\mathcal{N}} | x < 5 \}$
+
+\part{d} The set containing the string aba 
+
+\part{e} $\{ x \notin \Sigma^* \}$
+
+\part{f} $\{ \emptyset \}$
+
+\question{2}{Suppose S is a set with n elements:}
+
+\part{a} $|S| = n$, The number of relations on S $ = 2^{n^2}$ 
+
+\part{b} $|S| = n$, The number of reflexive relations on S $ = 2^{n^{2}-n}$
+
+\part{c} $|S| = n$, The number of symmetric relations on S $ = 2^{\frac{n(n+1)}{2}}$  
+
+\part{d} $|S| = n$, The number of reflexive and symmetric relations on S $ = 3^{\frac{n(n-1)}{2}}$
+
+\question{3}{Find the error in the proof:}
+
+\begin{center}
+  \begin{itemize}
+    \item The proof mentions the sets H1 and H2 which are not necessaraly groups of multiple hourses.
+    Therefore the claims made in the induction step are not necessarily valid.
+  \end{itemize}
+\end{center}
+
+\question{4}{ Give a simple non-recursive definition in each case:}
+
+\part{a} Append all $y \in \Sigma$ onto the end of any $x \in L$
+
+\part{b} Generate all strings with one 'a', and zero or more 'b's. 
+
+\question{5}{Give recursive definitions of each of the following sets.}
+
+\part{a} The set N of all natural numbers. 
+
+\begin{center}
+\begin{itemize}
+  \item $1 \in {\mathcal{N}}$ \\
+  \item $(x + 1) \in {\mathcal{N}}$ if $(x+1) > 0$
+  \end{itemize}
+\end{center}
+
+\pagebreak
+
+\part{b} The set S of all natural numbers divisible by 7. 
+
+\begin{center}
+\begin{itemize}
+  \item $7 \in {\mathcal{S}}$ \\
+  \item $(x + 1) \in {\mathcal{S}}$ if $mod(x,7) > 0$
+  \end{itemize}
+\end{center}
+
+\part{c} The set A of all strings in $\{a, b\}^*$ containing the substring 'aa'. 
+
+\begin{center}
+\begin{itemize}
+  \item $'aa' \in {\mathcal{A}}$ \\
+  \item $x\sigma,{\sigma}x \in \mathcal{A}$ if $x \in \{a, b\}^*$ and $\sigma \in {\mathcal{A}}$
+  \end{itemize}
+\end{center}
+
+\question{6}{Recursive definition for the number of characters in a string}
+\begin{center}
+\begin{itemize}
+  \item $n_{b}(\epsilon) = 0$ \\
+  \item $n_{b}('b') = 1$ \\
+  \item $n_{b}('a') = 0$ \\
+  \item $n_{b}(x) = n_{b}(\sigma)+n_{b}(c)   $ if $c \in \Sigma^*$
+  \end{itemize}
+\end{center}
+
+\question{7}{Proof:}
+\begin{center}
+  \begin{itemize}
+    \item Observe that $|\epsilon| = 0$
+
+    \item Assume a definition for length  $|x\sigma| = 1+|x|$ if  $x \in \Sigma^*$ and  $\sigma \in \Sigma$
+    \[ |xy| = |x|+|y| \]
+    \[|({\sigma}z)y| = |{\sigma}z| + |y| \]
+    \[|{\sigma}(zy)| = |{\sigma}z| + |y| \]
+    \[ 1 + |zy| = |{\sigma}z| + |y| \]
+    \[ 1 + |zy| = 1 + |z| + |y|  \]
+    \[|zy| = |z| + |y| \]
+    
+  \end{itemize}
+\end{center}
+\indent \indent $\Box$
+\end{document}
