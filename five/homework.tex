@@ -8,6 +8,7 @@
 \newcommand{\question}[2] {\vspace{.25in} \fbox{#1} #2 \vspace{.10in}}
 \renewcommand{\part}[1] {\vspace{.10in} {\bf (#1)}}
 
+\usepackage{pst-node}
 \usepackage{graphicx}
 \usepackage{amssymb,amsmath}
 
@@ -27,14 +28,31 @@
 \ttfamily
 
 
-\question{1}{}
+\question{1}{Proof:}
+\begin{center}
+  \begin{itemize}
+    \item Let $L = \{ a^{i} b^{j} | i \ne j \} $ is regular.
+
+    \item L is regular can not be the case.
+  \end{itemize}
+\end{center}
+
+\indent $\Box$
 
 
-\question{2}{}
+
+
+\question{2}{
+Let $x$ and $y$ be strings and let $L$ be any language. We say that $x$ and $y$ are distin- 
+guishable by $L$ if some string z exists whereby exactly one of the strings $xz$ and $yz$ 
+is a member of $L$; otherwise, for every string $z$, we have $xz \in L$ whenever $yz \in L$ 
+and we say that $x$ and $y$ are indistinguishable by $L$. If $x$ and $y$ are indistinguishable 
+by $L$ we write $x {\equiv}_{L} y$. Show that ${\equiv}_{L}$ is an equivalence relation.
+  }
 
 \question{3}{}
 
-\question{4}{}
+\question{4}{Minimize the DFA.}
  
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
@@ -62,8 +80,40 @@ $\;$&$1$&$2$&$3$&$4$&$5$&$6$&$7$&$8$&$9$\\
 \end{tabular}
 \end{center}
 
-\question{5}{}
+\begin{figure}[!htb]
+\centering
+\psframebox*[fillcolor=black!10!cyan!20,fillstyle=solid]{%
+\rule[-1.7cm]{0pt}{3.9cm}
+$\psmatrix[mnode=Circle,radius=5mm,colsep=2.0cm,rowsep=1.5cm,
+	arrowscale=1.5]
+[name=1,style=Cblue] 1 &  [name=2,shadow=true] 2 &  [name=3,style=Cred] 3
+\ncline[nodesep=1pt]{->}{1}{2}_{S_o\lambda^{-1}}
+\ncline[nodesep=1pt]{->}{2}{3}_{S_a\lambda^{-1}}
+\ncarc[nodesep=1pt,arcangle=60]{<-}{1}{3}^{F_a\lambda^{-1}}
+\nccurve[angleA=-105,angleB=-55,ncurv=4,nodesep=1pt]{->}{3}{3}
+\nbput[nrot=:U]{S_a\lambda^{-1}}
+\endpsmatrix$ }
 
-\question{6}{}
+\caption{This is an example of a life-cycle diagram drawn using PStricks}
+\end{figure}
+
+
+\question{5}{ }
+
+\part{a}
+ 
+\part{b}
+
+\part{c}
+
+\part{d}
+
+\question{6}{Sipser 2.4(b): $\{ w | w $ starts and ends with the same symbol$\}$ }
+
+$ R \rightarrow 0 R \;|\; 1 R\; |\; \epsilon $
+
+
+$ S \rightarrow 0\; |\; 1 \;|\; 0 R 0 \;|\; 1 R 1$
+
 
 \end{document}
