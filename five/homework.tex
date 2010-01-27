@@ -12,12 +12,15 @@
 \usepackage{graphicx}
 \usepackage{amssymb,amsmath}
 
+\pagestyle{empty}
+\newpsstyle{Cblue}{fillstyle=solid,fillcolor=blue!30}
+\newpsstyle{Cred}{fillstyle=solid,fillcolor=red!30,shadow=true}
+
 \begin{document}
 
 \medskip                        % Skip a "medium" amount of space
                                 % (latex determines what medium is)
                                 % Also try: \bigskip, \littleskip
-
 
 \begin{center}                  % Center the following lines
   {\Large Introduction to the Theory of Computation \\ Homework \#5} \\
@@ -40,8 +43,6 @@
 \indent $\Box$
 
 
-
-
 \question{2}{
 Let $x$ and $y$ be strings and let $L$ be any language. We say that $x$ and $y$ are distin- 
 guishable by $L$ if some string z exists whereby exactly one of the strings $xz$ and $yz$ 
@@ -53,7 +54,7 @@ by $L$ we write $x {\equiv}_{L} y$. Show that ${\equiv}_{L}$ is an equivalence r
 \question{3}{}
 
 \question{4}{Minimize the DFA.}
- 
+
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 \hline
@@ -82,16 +83,17 @@ $\;$&$1$&$2$&$3$&$4$&$5$&$6$&$7$&$8$&$9$\\
 
 \begin{figure}[!htb]
 \centering
-\psframebox*[fillcolor=black!10!cyan!20,fillstyle=solid]{%
+\psframebox*[fillcolor=white,fillstyle=solid]{%
 \rule[-1.7cm]{0pt}{3.9cm}
-$\psmatrix[mnode=Circle,radius=5mm,colsep=2.0cm,rowsep=1.5cm,
-	arrowscale=1.5]
-[name=1,style=Cblue] 1 &  [name=2,shadow=true] 2 &  [name=3,style=Cred] 3
-\ncline[nodesep=1pt]{->}{1}{2}_{S_o\lambda^{-1}}
-\ncline[nodesep=1pt]{->}{2}{3}_{S_a\lambda^{-1}}
-\ncarc[nodesep=1pt,arcangle=60]{<-}{1}{3}^{F_a\lambda^{-1}}
-\nccurve[angleA=-105,angleB=-55,ncurv=4,nodesep=1pt]{->}{3}{3}
-\nbput[nrot=:U]{S_a\lambda^{-1}}
+$\psmatrix[mnode=circle,radius=5mm,colsep=2.0cm,rowsep=1.5cm, arrowscale=1.5]
+           [name=1] 1 &  [name=3] 3 & [name=24] \{2,4\} & [name=78] \{7,8\} & [name=569,shadow=true] \{5,6,9\}
+\ncline[nodesep=1pt]{->}{1}{3}_{b}
+\ncline[nodesep=1pt]{->}{}{1}_{}
+\nccurve[angleA=-35,angleB=-155,ncurv=1,nodesep=1pt]{->}{1}{24}
+\nbput[nrot=:U]{a}
+\ncline[nodesep=1pt]{->}{569}{78}_{b}
+\nccurve[angleA=-105,angleB=-55,ncurv=3,nodesep=1pt]{->}{569}{569}
+\nbput[nrot=:U]{a}
 \endpsmatrix$ }
 
 \caption{This is an example of a life-cycle diagram drawn using PStricks}

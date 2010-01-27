@@ -1,14 +1,16 @@
-LATEX=pdflatex
-CONVERT_DVI=dvipdf
+LATEX=latex
+PS=dvips
+PDF=ps2pdf
+
 NAME=b_gianforcaro_hw_five
 default: pdf 
 
 pdf: homework.tex
 	$(LATEX) homework.tex
-	rm -rf homework.log
-	rm -rf homework.aux
+	$(PS) homework.dvi
+	$(PDF) homework.ps
 	mv homework.pdf $(NAME).pdf
-	open $(NAME).pdf 
+	make clean
 
 clean:
 	rm -f homework.dvi
@@ -16,3 +18,4 @@ clean:
 	rm -f homework.log
 	rm -f homework.pdf
 	rm -f homework.toc
+	rm -f homework.ps
