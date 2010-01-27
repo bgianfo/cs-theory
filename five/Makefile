@@ -10,6 +10,7 @@ pdf: homework.tex
 	$(PS) homework.dvi
 	$(PDF) homework.ps
 	mv homework.pdf $(NAME).pdf
+	open $(NAME).pdf
 	make clean
 
 clean:

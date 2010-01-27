@@ -1,20 +1,17 @@
 \documentclass[11pt]{article}
 
 \oddsidemargin0cm
-\topmargin-2cm     %I recommend adding these three lines to increase the 
+\topmargin1cm     %I recommend adding these three lines to increase the 
 \textwidth16.5cm   %amount of usable space on the page (and save trees)
 \textheight23.5cm  
 
 \newcommand{\question}[2] {\vspace{.25in} \fbox{#1} #2 \vspace{.10in}}
 \renewcommand{\part}[1] {\vspace{.10in} {\bf (#1)}}
-
-\usepackage{pst-node}
+\usepackage{pstricks,pst-node,pst-tree}
 \usepackage{graphicx}
 \usepackage{amssymb,amsmath}
-
-\pagestyle{empty}
-\newpsstyle{Cblue}{fillstyle=solid,fillcolor=blue!30}
-\newpsstyle{Cred}{fillstyle=solid,fillcolor=red!30,shadow=true}
+\usepackage{multicol}
+\usepackage{subfig}
 
 \begin{document}
 
@@ -28,15 +25,19 @@
   \date \\
 \end{center}
 
-\ttfamily
+%\ttfamily
 
-
-\question{1}{Proof:}
+\question{1}{Proof: By contradiction}
 \begin{center}
   \begin{itemize}
-    \item Let $L = \{ a^{i} b^{j} | i \ne j \} $ is regular.
-
-    \item L is regular can not be the case.
+    \item Assume $L = \{ a^{i} b^{j} | i \ne j \} $ is regular language.
+    \item Let p be the pumping length.
+    \item Now consider the string $s = a^{p}1^{p}$ which is in L.
+    \item Using the pumpig lemma, $s = xyz$ so thate $|xy| = p$
+    \item This means that $y$ consists entirely of $a$'s.
+    \item Considering $xz$, we have equal the number $a$'s and $b$'s.
+    \item This means the resulting string is still in the language $L$.
+    \item Hence, L is regular can not be the case.
   \end{itemize}
 \end{center}
 
@@ -51,7 +52,22 @@ and we say that $x$ and $y$ are indistinguishable by $L$. If $x$ and $y$ are ind
 by $L$ we write $x {\equiv}_{L} y$. Show that ${\equiv}_{L}$ is an equivalence relation.
   }
 
-\question{3}{}
+\begin{itemize}
+\item Let $L$ be a language.
+\item Let $z$ be a set of strings.
+\item $z$ is pairwise distinguishable by $L$ if any two strings in $z$ are distinguishable by $L$.
+\item The index of $L$ is equal to the number of equivalence classes in $L$, which can be either finite or infinite.
+\end{itemize}
+
+
+\question{3}{ We can define a recursive set which infinetly generates all possible strings. }
+
+\begin{itemize}
+\item $\epsilon \in S$
+\item $ S = \{\; ()x \;$ or $\; x() \;$ or $(x)\; | \; x \in S \;\}$
+\end{itemize}
+
+\pagebreak
 
 \question{4}{Minimize the DFA.}
 
@@ -66,7 +82,7 @@ $\;$&$1$&$2$&$3$&$4$&$5$&$6$&$7$&$8$&$9$\\
 \hline
 3&$x_1$&$x_1$&-&-&-&-&-&-&-\\
 \hline
-4&$x_1$&\;&$x_1$&-&-&-&-&-&-\\
+4&$x_1$&$x_1$&$x_1$&-&-&-&-&-&-\\
 \hline
 5&$x_0$&$x_0$&$x_0$&$x_0$&-&-&-&-&-\\
 \hline
@@ -85,30 +101,143 @@ $\;$&$1$&$2$&$3$&$4$&$5$&$6$&$7$&$8$&$9$\\
 \centering
 \psframebox*[fillcolor=white,fillstyle=solid]{%
 \rule[-1.7cm]{0pt}{3.9cm}
-$\psmatrix[mnode=circle,radius=5mm,colsep=2.0cm,rowsep=1.5cm, arrowscale=1.5]
-           [name=1] 1 &  [name=3] 3 & [name=24] \{2,4\} & [name=78] \{7,8\} & [name=569,shadow=true] \{5,6,9\}
-\ncline[nodesep=1pt]{->}{1}{3}_{b}
-\ncline[nodesep=1pt]{->}{}{1}_{}
-\nccurve[angleA=-35,angleB=-155,ncurv=1,nodesep=1pt]{->}{1}{24}
+$\psmatrix[mnode=circle,radius=5mm,colsep=1.0cm,rowsep=1.0cm, arrowscale=1.5]
+           [name=1]\{ 1 \} & [name=2] \{2\} &&  [name=3] \{ 3 \} & [name=4] \{4\} & [name=78] \{7,8\} & [name=569,shadow=true] \{5,6,9\}
+\ncline[nodesep=1pt]{->}{3}{4}_{b}
+\nccurve[angleA=45,angleB=125,ncurv=1,nodesep=1pt]{->}{3}{569}
 \nbput[nrot=:U]{a}
-\ncline[nodesep=1pt]{->}{569}{78}_{b}
+\nccurve[angleA=45,angleB=135,ncurv=1,nodesep=1pt]{->}{4}{569}
+\nbput[nrot=:U]{b}
+\nccurve[angleA=35,angleB=155,ncurv=1,nodesep=1pt]{->}{1}{3}
+\nbput[nrot=:U]{b}
+\nccurve[angleA=-25,angleB=210,ncurv=1,nodesep=1pt]{->}{2}{4}
+\nbput[nrot=:U]{a}
+\nccurve[angleA=-35,angleB=220,ncurv=1,nodesep=1pt]{->}{2}{569}
+\nbput[nrot=:U]{b}
+\nccurve[angleA=-35,angleB=-155,ncurv=1,nodesep=1pt]{->}{1}{2}
+\nbput[nrot=:U]{a}
+\nccurve[angleA=210,angleB=-35,ncurv=1,nodesep=2pt]{->}{569}{78}
+\nbput[nrot=:D]{b}
 \nccurve[angleA=-105,angleB=-55,ncurv=3,nodesep=1pt]{->}{569}{569}
 \nbput[nrot=:U]{a}
+\nccurve[angleA=35,angleB=155,ncurv=1,nodesep=1pt]{->}{78}{569}
+\nbput[nrot=:U]{b}
+\nccurve[angleA=-105,angleB=-55,ncurv=3,nodesep=1pt]{->}{78}{78}
+\nbput[nrot=:U]{a}
+\nccurve[angleA=-105,angleB=-55,ncurv=3,nodesep=1pt]{->}{4}{4}
+\nbput[nrot=:U]{b}
 \endpsmatrix$ }
-
-\caption{This is an example of a life-cycle diagram drawn using PStricks}
 \end{figure}
+
 
 
 \question{5}{ }
 
-\part{a}
- 
-\part{b}
+\part{a} a (left most)
+\begin{itemize}
+\item $E \Rightarrow T$
+\item $\;\;\;\;\Rightarrow F$
+\item $\;\;\;\;\Rightarrow a$
+\end{itemize}
 
-\part{c}
+\pstree[]{\Tcircle{E} }{
+        \pstree{\Tcircle{F}}{ \Tcircle{a} } }
 
-\part{d}
+
+\pagebreak
+
+\part{b} a + a (left most)
+\begin{itemize}
+\item $E \Rightarrow E + T$
+\item $\;\;\;\;\Rightarrow T + T$
+\item $\;\;\;\;\Rightarrow F + T$
+\item $\;\;\;\;\Rightarrow a + T$
+\item $\;\;\;\;\Rightarrow a + F$
+\item $\;\;\;\;\Rightarrow a + a$
+\end{itemize}
+
+\pstree[]{\Tcircle{E} }{
+        \pstree{ \Tcircle{E} }{ \pstree{ \Tcircle{T} }{  \pstree{\Tcircle{F} }{ \Tcircle{a} }}}
+        \Tcircle{+}
+        \pstree{ \Tcircle{E} }{ \pstree{ \Tcircle{T} }{  \pstree{\Tcircle{F} }{ \Tcircle{a} }}}
+
+}
+
+
+\pagebreak
+
+\part{c} a + a + a (right most)
+
+\begin{itemize}
+\item $E \Rightarrow E + T$
+\item $\;\;\;\;\Rightarrow E + F$
+\item $\;\;\;\;\Rightarrow E + a$
+\item $\;\;\;\;\Rightarrow E + T + a$
+\item $\;\;\;\;\Rightarrow E + T + a$
+\item $\;\;\;\;\Rightarrow E + F + a$
+\item $\;\;\;\;\Rightarrow E + a + a$
+\item $\;\;\;\;\Rightarrow T + a + a$
+\item $\;\;\;\;\Rightarrow F + a + a$
+\item $\;\;\;\;\Rightarrow a + a + a$
+\end{itemize}
+
+\pstree[nodesep=1pt,radius=1pt]{\Tcircle{E} }{
+        \pstree{ \Tcircle{E} }{ \pstree{ \Tcircle{E} }{
+                                   \pstree{ \Tcircle{T} }{ 
+                                      \pstree{ \Tcircle{F} }{ \Tcircle{a} }}} 
+                                \Tcircle{+} 
+                                \pstree{ \Tcircle{T} }{
+                                   \pstree{ \Tcircle{F} }{ \Tcircle{a} }} }
+        \Tcircle{+}
+        \pstree{ \Tcircle{T} }{ \pstree{ \Tcircle{F} }{ \Tcircle{a} }}
+
+}
+
+\pagebreak
+
+\part{d} ((a))
+
+$E \Rightarrow T$
+
+$\;\;\;\;\Rightarrow F$
+
+$\;\;\;\;\Rightarrow (E)$
+
+$\;\;\;\;\Rightarrow (T)$
+
+$\;\;\;\;\Rightarrow (F)$
+
+$\;\;\;\;\Rightarrow ((E))$
+
+$\;\;\;\;\Rightarrow ((T))$
+
+$\;\;\;\;\Rightarrow ((F))$
+
+$\;\;\;\;\Rightarrow ((a))$
+
+\pstree[nodesep=1pt,radius=1pt]{\Tcircle{E} }{
+      \pstree{ \Tcircle{T} }{
+                     \pstree{ \Tcircle{F} }{ 
+                       \Tcircle{$($} 
+                       \pstree{ \Tcircle{E} }{ 
+                         \pstree{\Tcircle{T} } {
+                           \pstree{\Tcircle{F} } {
+                            \Tcircle{$($} 
+                              \pstree{ \Tcircle{E} }{ 
+                                \pstree{\Tcircle{T} } {
+                                  \pstree{\Tcircle{F} } {
+                                    \Tcircle{a}
+                                  }
+                                }
+                              }
+                            \Tcircle{$)$}
+                           }
+                         }
+                       }
+                       \Tcircle{$)$}
+                     }
+                  } 
+}
 
 \question{6}{Sipser 2.4(b): $\{ w | w $ starts and ends with the same symbol$\}$ }
 
@@ -116,6 +245,5 @@ $ R \rightarrow 0 R \;|\; 1 R\; |\; \epsilon $
 
 
 $ S \rightarrow 0\; |\; 1 \;|\; 0 R 0 \;|\; 1 R 1$
-
 
 \end{document}
