@@ -1,0 +1,245 @@
+\documentclass[11pt]{article}
+
+\oddsidemargin0cm
+\topmargin1cm     %I recommend adding these three lines to increase the 
+\textwidth16.5cm   %amount of usable space on the page (and save trees)
+\textheight23.5cm  
+
+\newcommand{\question}[2] {\vspace{.25in} \fbox{#1} #2 \vspace{.10in}}
+\renewcommand{\part}[1] {\vspace{.10in} {\bf (#1)}}
+\usepackage{pstricks,pst-node,pst-tree}
+\usepackage{graphicx}
+\usepackage{amssymb,amsmath}
+\usepackage{multicol}
+\usepackage{subfig}
+
+\begin{document}
+
+\medskip                        % Skip a "medium" amount of space
+                                % (latex determines what medium is)
+                                % Also try: \bigskip, \littleskip
+
+\begin{center}                  % Center the following lines
+  {\Large Introduction to the Theory of Computation \\ Homework \#7} \\
+  Brian Gianforcaro \\
+  \date \\
+\end{center}
+
+%\ttfamily
+
+\question{1}{Proof: By Mathematical Induction}
+ \begin{center}
+  \begin{itemize}
+   \item Let $T$ be any binary tree.
+   \item Let $height(x)$ be the height of any binary tree x.
+   \item Let $leaves(x)$ be the number of leaves in any binary tree x.
+
+   \item Suppose for any $n \in N$ if $height(T) < n$ then, $leaves(T) < 2^n$
+
+   \item \textbf{Basis Step:}
+
+   \item We have the binary tree $T$ with one node, and no leaves.
+   
+   \item Since $height(T) = 0$ and $leaves(T) = 0$ then $0 < n$ is true and $ 0 < 2^n$ is also true. 
+
+   \item \textbf{Induction:}
+
+   \item Assume an $n \in N$.
+
+   \item Let $T$ be any arbitrary tree of size $s$, and by definition of a binary tree T is the root with two sub-tree's.
+
+   \item Let $height(T)$ of a binary tree be defined as: $height(T) = 1 + max( height(T_L), height(T_R) ) $
+
+   \item Since $leaves(T)$ must be an integer it can be said that: $leaves(T) \leq \lceil \frac{s}{2} \rceil $
+
+   \item Accordingly it can also be said that $height(T) \leq \lceil \frac{s}{2} \rceil$
+
+   \item Thus if  $\lceil \frac{s}{2} \rceil < n$ then, $ \lceil \frac{s}{2} \rceil < 2^n$ must also hold.
+   
+   \item Therefore we have established for any $n \in N$ if $height(T) < n$ then, $leaves(T) < 2^n$
+  \end{itemize}
+ \end{center}
+
+\indent $\Box$
+
+\pagebreak
+
+\question{2}{Proof: By Contradiction}
+
+ \begin{center}
+  \begin{itemize}
+
+    \item Suppose $L = \{ a^{i} | i $ is a square $ \}$ is a CFL.
+
+    \item Then the pumping lemma applies and there exists a number n so that any sufficiently long string $z \in L$ can be pumped.
+
+    \item Pick $z = a^n$
+
+    \item Since $|z| \geq n$, it follows that $z = uvwzy$, $|vwx| \leq n$, and $|vx| > 0 $.
+
+    \item Since $|vwx| \leq n$, $vx$ can contain at most the two different symbols. Further, if there are two symbols they must be adjacent.
+
+    \item Suppose $xv$ contains one symbol. Then that symbol can be increased and so $a^n$ is in $L$ for $k > n$. But none of those are in $L$.
+
+    \item Thus we arrive at a contradiction.
+
+    \item So Suppose $vx$ contains two symbols. Then two adjacent symbols can be increased by the same amount.
+    
+    \item If such an increase leads to alteration, we immediately get a contradiction.
+    
+    \item Otherwise, only adjacent symbols are increased, and nonadjacent symbols are left balanced again leading to a contradiction. 
+
+    \item For example $a a^n \notin L$ or $ a^{11} a^n \notin L$.
+
+    \item Thus in all cases, we obtain a contradiction so $L$ is a CFL can not be the case.
+
+  \end{itemize}
+\end{center}
+\indent\indent $\Box$
+
+\question{3}{Are the following languages CFLs?}
+
+\part{a} Yes
+
+\part{b} Yes
+
+\part{c} No
+
+\part{d} Yes
+
+\part{e} No
+
+\pagebreak
+
+\question{4}{Sipser, excercise 3.1}
+
+\begin{multicols}{4}
+
+\part{c} 000.
+
+$ $
+
+$ \vdash_m q_1 0 0 0 \sqcup $
+
+$ \vdash_m \sqcup q_2 0 0 \sqcup $
+
+$ \vdash_m \sqcup x q_3 0 \sqcup $
+
+$ \vdash_m \sqcup x 0 q_4 \sqcup $
+
+$ \vdash_m q_{reject} $
+
+\part{d} 000000.
+
+
+$ $ 
+
+$ \vdash_m q_1 0 0 0 0 0 0  $
+
+$ \vdash_m \sqcup q_2 0 0 0 0 0 $
+
+$ \vdash_m \sqcup x q_3 0 0 0 0 $
+
+$ \vdash_m \sqcup x 0 q_4 0 0 0 $
+
+$ \vdash_m \sqcup x 0 x q_3 0 0 $
+
+$ \vdash_m \sqcup x 0 x 0 q_4 0 $
+
+$ \vdash_m \sqcup x 0 x 0 x q_3 $
+
+$ \vdash_m \sqcup x 0 x 0 x q_3 $
+
+$ \vdash_m \sqcup x 0 x 0 q_5 x $
+
+$ \vdash_m \sqcup x 0 x q_5 0 x $
+
+$ \vdash_m \sqcup x 0 q_5 x 0 x $
+
+$ \vdash_m \sqcup x q_5 0 x 0 x $
+
+$ \vdash_m q_5 \sqcup x 0 x 0 x $
+
+$ \vdash_m \sqcup q_2 x 0 x 0 x $
+
+$ \vdash_m \sqcup x q_2 0 x 0 x $
+
+$ \vdash_m \sqcup x x q_3 x 0 x $
+
+$ \vdash_m \sqcup x x x q_3 0 x $
+
+$ \vdash_m \sqcup x x x 0 x q_4 $
+
+$ \vdash_m q_{reject} $
+
+\end{multicols}
+
+\question{5}{Sipser, exercies 3.2}
+
+\begin{multicols}{2}
+
+
+\part{c} 1\#\#1
+
+$ $ 
+
+$ \vdash_m q_1 1 \# \# 1 $
+
+$ \vdash_m x q_3 \# \# 1 $
+
+$ \vdash_m x \# q_5 \# 1 $
+
+$ \vdash_m q_{reject} $
+
+\part{d} 10\#\#11
+
+$ $ 
+
+$ \vdash_m q_1 1 0 \# \# 1 1 $
+
+$ \vdash_m x q_3 0 \# \# 1 1 $
+
+$ \vdash_m x 0 q_3 \# \# 1 1 $
+
+$ \vdash_m x 0 \# q_5 \# 1 1 $
+
+$ \vdash_m q_{reject} $
+
+\end{multicols}
+\question{6}{A machine which accepts a's then b's. The number of b's have to be greater than the number of a's but less than twice the number of a's}
+
+$ $
+
+$ $
+
+$ $
+
+$ $
+
+\psmatrix 
+[mnode=circle,colsep=1.2cm,rowsep=1cm] 
+% States: 
+[mnode=R]{\mbox{}} 
+& & & & & [name=0]$q_0$ \\ \\
+& & & & & [name=1]$q_1$  & & & & &[name=4]$q_4$ \\[0pt] 
+& &[name=2]$q_2$ \\
+& [doubleline=true,name=a]$q_a$ & & & [name=3]$q_3$ & &
+\endpsmatrix 
+% Transitions: 
+\psset{nodesep=3pt,arrows=->,arcangle=15, labelsep=4pt,shortput=nab} 
+\footnotesize 
+\ncline[linestyle=solid]{0,0}{1} 
+\ncline{4}{0}_{$ \#, \# \to R $} 
+\ncline{0}{2}_{$ b \to R $} 
+\ncline{0}{1}^{$ a, \# \to R $} 
+\ncline{1}{2}_{$ b \to R $} 
+\ncline{1}{3}_{$ \# \to L $} 
+\ncline{2}{a}_{$ \# \to R $} 
+\ncarc{3}{4}_{$ b, \# \to L $} 
+\nccircle[angleA=290]{1}{.25cm}_{\textbf{ $ b \to R $}}
+\nccircle[angleA=-290]{1}{.25cm}_{ $ a \to R$ }
+\nccircle[angleA=200]{2}{.4cm}_{ $ b \to R$ }
+\nccircle[angleA=-200]{4}{.4cm}_{ $ a \to L$ }
+\nccircle[angleA=270]{4}{.4cm}_{ $ b \to L$ }
+
+\end{document}
