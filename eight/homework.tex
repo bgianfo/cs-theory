@@ -1,0 +1,157 @@
+\documentclass[11pt]{article}
+
+\oddsidemargin0cm
+\topmargin0cm     %I recommend adding these three lines to increase the 
+\textwidth16.5cm   %amount of usable space on the page (and save trees)
+\textheight23.5cm  
+
+\newcommand{\question}[2] {\vspace{.25in} \fbox{#1} #2 \vspace{.10in}}
+\renewcommand{\part}[1] {\vspace{.10in} {\bf (#1)}}
+\usepackage{pstricks,pst-node,pst-tree}
+\usepackage{pstricks-add}
+\usepackage{graphicx}
+\usepackage{amssymb,amsmath}
+
+\defineTColor{TRed}{red}
+\defineTColor{TGreen}{green}
+\defineTColor{TBlue}{blue}
+\defineTColor{TYellow}{yellow}
+\defineTColor{TOrange}{orange}
+\defineTColor{TGray}{gray}
+
+
+\begin{document}
+
+\medskip                        % Skip a "medium" amount of space
+                                % (latex determines what medium is)
+                                % Also try: \bigskip, \littleskip
+
+\begin{center}                  % Center the following lines
+  {\Large Introduction to the Theory of Computation \\ Homework \#8} \\
+  Brian Gianforcaro \\
+  \date \\
+\end{center}
+
+%\ttfamily
+
+\question{1}{Venn Diagram:}
+
+\begin{frame}
+\leavevmode\put(0,0){%
+  \begin{pspicture}(-3,-3)(2,5)
+    \pscircle[linecolor=green,style=TGreen](1;45){4cm}
+    \pscircle[linecolor=gray,style=TGray](8;05){4cm}
+    \pscircle[linecolor=red,style=TRed](0.8;165){1cm}
+    \pscircle[linecolor=blue,style=TBlue](-2.2;185){1.7cm}
+    \pscircle[linecolor=orange,style=TOrange](0.8;163){1.7cm}
+    \rput(8,1.5){\textbf{Recursive Languages}}
+    \rput(-0.65,1.5){\textbf{CFLs}}
+    \rput(-0.65,0.5){\textbf{NFA}}
+    \rput(2.3,0.5){\textbf{$\overline{R.E.}$}}
+    \rput(0.6,3.3){\textbf{Turing Machine, 25 tapes}}
+  \end{pspicture}
+}
+\end{frame}
+
+\question{2}{Show the following is decidable:}
+
+\begin{center}
+ Given a CFG $G$, is $L(G)$ non empty?
+\end{center}
+
+\textbf{Proof:}
+
+\question{3}{Sipser, exercise 4.6}
+
+Assume $B$ is countable and that $f\colon \mathbb{N} \to  \mathbb{B}$ is a functional correspondence.  Let $f_{i}(j)$ denote
+\indent the $i^{th}$ symbol in $f(j)$.  Consider the string $s$ whose $i^{th}$ element differs from $f_{i}(i)$, then the 
+\indent $i^{th}$ symbol in $s$ is $1$ and vice versa.  Then $s$ cannot be in the image of $f$ since it differs from
+\indent every string in the image of $f$ by at least one symbol. Furthermore, $s$ is in $B$ since it is an 
+\indent infinite sequence over $\{0,1\}$. Therefore, B is uncountable.
+
+\question{4}{Sipser, exercise 4.12}
+
+\textbf{Definition of the given Turing machine:}
+
+$ $
+
+$M$ = "On input $<R,S>$ where $R$ and $S$ are regular expressions 
+
+ \begin{center}
+   \begin{enumerate}
+     \item Convert $R$ to DFA $A$ and $S$ to DFA $B$ 
+     \item Construct DFA $C$ such that $L(C) = L(B) ? L(A)$ 
+     \item Submit $<A,C>$ to the decider for EQDFA 
+     \item If it accepts, $accept$.
+     \item If it rejects, $reject$." 
+   \end{enumerate}
+ \end{center}
+     
+$M$ is a decidable since steps $1$, $2$, $4$, and $5$ will not create and infinite loops and step
+\indent $2$ calls a decider.  Also, $M$ accepts $<R,S>$ if and only if $L(R) = L(R)$ ? $L(S).$ 
+\indent Therefore, $M$ is a decider for $A$ so $A$ is decidable. 
+
+\question{5}{\textbf{Problem:} Given a CFG G, is $L(G) = \Sigma^{*}$}
+
+\part{a} CFGs are strictly more powerful than REs, this problem is in both $RE$ and $\overline{RE}$.
+
+\part{b}
+
+\question{6}{Sipser, exercise 5.9}
+
+\textbf{Proof:}
+
+$ $
+
+We show that the language $T$ is undecidable by showing that $H_{TM} \geq T$. The reduction 
+\indent function $f$ takes as input $(M,w)$ where $M$ is a Turing Machine and $w$ is a string, and 
+\indent outputs $f(M,w) = (N_{M,w})$, where $N_{M,w}$ is the Turing Machine that does the following:
+
+ \begin{center}
+  \begin{itemize}
+    \item On input $x$:
+    \begin{enumerate}
+     \item If $x = 01$, then $accept$.
+     \item Else if $x \not = 10$, then $reject$.
+     \item Else then simulate $M$ on $w$. If $M$ halts on $w$, then $accept$.
+    \end{enumerate}
+  \end{itemize}
+ \end{center}
+
+Clearly, the function $f$ is computable. If $(M,w) \in H_{TM}$ or $M$ halts on $w$ then 
+\indent $L(N_{M,w}) = \{01,10\}$, thus $(N_{M,w}) \notin T$. We conclude that $(M,w) \in H_{TM}$ if and 
+\indent only if $f(M,w) \in T$. Therefore $f$ is a reduction from $H_{TM}$ to $T$. It follows that $T$ is 
+\indent undecidable as $H_{TM}$ is undecidable.
+
+\indent $\Box$
+
+\pagebreak
+
+\question{7}{Sipser, exercise 5.13}
+
+\textbf{Proof:}
+
+$ $
+
+We show that $USELESS_{TM}$ is undecidable by showing that $\overline{H_{TM}} \geq USELESS_{TM}$. 
+\indent The reduction function $f$ takes as input $(M,w)$ where $M$ is a Turing Machine and $w$ 
+\indent is a string, and outputs $f(M,w) = (N_{M,w})$, where $N_{M,w}$ is the Turing Machine that
+\indent does the following:
+
+ \begin{center}
+  \begin{itemize}
+    \item On input symbol $0$, $N_{M,w}$ simply enters all it's states except for a special state $\overline{q}$.
+    \item On input symbol $1$, $N_{M,w}$ simulates $M$ on $w$, if $M$ halts on $w$, then enters state $\overline{q}$.
+  \end{itemize}
+ \end{center}
+
+Clearly, the function $f$ is computable. From the behavior of  $N_{M,w}$ on input symbol $0$,
+\indent it is clear that only the special state $\overline{q}$ can be useless, and from the behavior of $N_{M,w}$
+\indent on input symbol 1, it is clear that $\overline{q}$ is useless if and only if $M$ does not halt  on $w$. 
+\indent Therefore $(M,w) \in \overline{H_{TM}}$ if and only if $f(M,w) \in USELESS_{TM}$, and hence f is a 
+\indent reduction from $\overline{H_{TM}}$ to $USELESS_{TM}$. It follows that $USELESS_{TM}$ is undecidable 
+\indent as $H_{TM}$ is undecidable.
+
+\indent $\Box$
+
+\end{document}

@@ -1,0 +1,12 @@
+# Proven minimization example.
+# Source: www.comp.nus.edu.sg/~cs4212/dfa-min.pdf
+initial q0
+q0 a q1
+q0 b q3
+q1 b q2
+q1 a q2
+q2 b q2
+q2 a q2
+q3 a q3
+q3 b q3
+final q1,q2

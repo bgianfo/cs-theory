@@ -1,0 +1,19 @@
+# Example DFA Minimization:
+# Source: www.cse.cuhk.edu.hk/~andrejb/csc3130/f08/slides/08T4.pdf
+#
+initial a
+a 0 c
+a 1 b
+b 0 f
+b 1 g
+c 0 d
+c 1 e
+d 0 d
+d 1 e
+e 0 f
+e 1 g
+f 0 d
+f 1 e
+g 1 g
+g 0 f
+final f,g

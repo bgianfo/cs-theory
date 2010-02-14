@@ -1,0 +1,24 @@
+# Example DFA minimization from online lecture slide.
+# Source: http://people.hsc.edu/faculty-staff/robbk/Coms461/Lectures%202008/Lecture%2011%20-%20Minimizing%20DFAs.pdf 
+initial 1
+1 a 2
+1 b 7
+2 a 6
+2 b 3
+3 a 8
+3 b 9
+4 a 5
+4 b 3
+5 a 10
+5 b 7
+6 a 10
+6 b 3
+7 a 2
+7 b 9
+8 a 5
+8 b 7
+9 a 4
+9 b 10
+10 a 10
+10 b 10
+final 10

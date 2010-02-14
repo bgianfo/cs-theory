@@ -1,0 +1,24 @@
+# Minimization from:
+#  Introduction to automata theory, languages, and computation
+#     -John Hopcroft Jeffery Ullman, example 3.8
+#
+# Source:http://www.cc.gatech.edu/classes/AY2009/cs3240_spring/Lectures/dfa-min.pdf
+#
+initial a
+a 0 b
+a 1 f
+b 1 c
+b 0 g
+c 1 c
+c 0 a
+d 0 c
+d 1 g
+e 1 f
+e 0 h
+f 1 g
+f 0 c
+g 1 e
+g 0 g
+h 1 c
+h 0 g
+final c
