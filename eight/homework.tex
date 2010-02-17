@@ -53,30 +53,49 @@
 }
 \end{frame}
 
-\question{2}{Show the following is decidable:}
+\question{2}{\textbf{Proof:}}
 
-\begin{center}
- Given a CFG $G$, is $L(G)$ non empty?
-\end{center}
+\smallskip
 
-\textbf{Proof:}
+\begin{itemize}
 
-\question{3}{Sipser, exercise 4.6}
+\item M = "On input $x$ check if $x = (G)$ where $G$ is an CFG .
+  \begin{enumerate}  
+  \centering
+  \raggedright
+    \item Convert $G$ into Chomsky normal form.
+    \item Mark all non-terminals $NT$ which have some rule $NT \to n$
+    \item Repeat until no new non-terminals are marked:
+      \begin{enumerate}
+        \item Mark the non-terminal $NT$ if there is a rule
+        \item $NT \to XZ$ such that $Z$ and $X$ are already marked.
+      \end{enumerate}
+    \item If $W$ is marked $(L(G) \not = \emptyset)$ then $M$ rejects, else accepts."
+  \end{enumerate}
+\item Since decider M can be constructed for the problem: "Given a CFG $G$, is $L(G)$ not empty?" then it must be decidable
+\end{itemize}
 
-Assume $B$ is countable and that $f\colon \mathbb{N} \to  \mathbb{B}$ is a functional correspondence.  Let $f_{i}(j)$ denote
-\indent the $i^{th}$ symbol in $f(j)$.  Consider the string $s$ whose $i^{th}$ element differs from $f_{i}(i)$, then the 
-\indent $i^{th}$ symbol in $s$ is $1$ and vice versa.  Then $s$ cannot be in the image of $f$ since it differs from
-\indent every string in the image of $f$ by at least one symbol. Furthermore, $s$ is in $B$ since it is an 
-\indent infinite sequence over $\{0,1\}$. Therefore, B is uncountable.
 
-\question{4}{Sipser, exercise 4.12}
+\indent $\Box$
 
-\textbf{Definition of the given Turing machine:}
+\pagebreak
+\question{3}{\textbf{Proof:}}
 
-$ $
+\begin{itemize}
+\item Assume $B$ is countable and that $f\colon \mathbb{N} \to  \mathbb{B}$ is a functional correspondence. 
+\item Let $f_{i}(j)$ denote the $i^{th}$ symbol in $f(j)$. 
+\item Consider the string $s$ whose $i^{th}$ element differs from $f_{i}(i)$, then the  $i^{th}$ symbol in $s$ is $1$ and vice versa.
+\item Then $s$ cannot be in the image of $f$ since it differs from every string in the image of $f$ by at least one symbol. 
+\item Furthermore, $s$ is in $B$ since it is an infinite sequence over $\{0,1\}$.
+\item Therefore, B is uncountable.
+\end{itemize}
 
-$M$ = "On input $<R,S>$ where $R$ and $S$ are regular expressions 
+\indent $\Box$
 
+\question{4}{\textbf{Proof:}}
+
+\begin{itemize}
+  \item $M$ = "On input $<R,S>$ where $R$ and $S$ are regular expressions 
  \begin{center}
    \begin{enumerate}
      \item Convert $R$ to DFA $A$ and $S$ to DFA $B$ 
@@ -87,25 +106,34 @@ $M$ = "On input $<R,S>$ where $R$ and $S$ are regular expressions
    \end{enumerate}
  \end{center}
      
-$M$ is a decidable since steps $1$, $2$, $4$, and $5$ will not create and infinite loops and step
-\indent $2$ calls a decider.  Also, $M$ accepts $<R,S>$ if and only if $L(R) = L(R)$ ? $L(S).$ 
-\indent Therefore, $M$ is a decider for $A$ so $A$ is decidable. 
+  \item $M$ is a decidable since steps $1$, $2$, $4$, and $5$ will not create and infinite loops and step $2$ calls a decider. 
+  \item Also, $M$ accepts $<R,S>$ if and only if $L(R) = L(R)$ ? $L(S).$ 
+  \item Therefore, $M$ is a decider for $A$ so $A$ is decidable. 
+\end{itemize}
+\indent $\Box$
 
 \question{5}{\textbf{Problem:} Given a CFG G, is $L(G) = \Sigma^{*}$}
 
 \part{a} CFGs are strictly more powerful than REs, this problem is in both $RE$ and $\overline{RE}$.
 
-\part{b}
+\part{b} \textbf{Proof Sketch:} 
+\begin{itemize}
+  \item Given that $ALL_{CFG}$ is is undecidable, $L(M_1) = L(M_2)$ is a similar problem.
+  \item As it asks if each FA produces the same set of all possible strings. 
+  \item As the set of strings is countably infinite, the question is answerable but it would in essence never return.
+  \item For example any case similar to $a^*$. 
+  \item In summary, the problem is atleast as hard as $ALL_{CFG}$, and would create a endless loop. 
+  \item Thus the problem is undecidable.
+\end{itemize}
+\indent \indent $\Box$
 
-\question{6}{Sipser, exercise 5.9}
+\pagebreak
+\question{6}{\textbf{Proof:}}
 
-\textbf{Proof:}
-
-$ $
-
-We show that the language $T$ is undecidable by showing that $H_{TM} \geq T$. The reduction 
-\indent function $f$ takes as input $(M,w)$ where $M$ is a Turing Machine and $w$ is a string, and 
-\indent outputs $f(M,w) = (N_{M,w})$, where $N_{M,w}$ is the Turing Machine that does the following:
+\begin{itemize}
+\item We show that the language $T$ is undecidable by showing that $H_{TM} \geq T$. 
+\item The reduction function $f$ takes as input $(M,w)$ where $M$ is a Turing Machine and $w$ is a string. 
+\item $f$ outputs $f(M,w) = (N_{M,w})$, where $N_{M,w}$ is the Turing Machine that does the following:
 
  \begin{center}
   \begin{itemize}
@@ -118,26 +146,19 @@ We show that the language $T$ is undecidable by showing that $H_{TM} \geq T$. Th
   \end{itemize}
  \end{center}
 
-Clearly, the function $f$ is computable. If $(M,w) \in H_{TM}$ or $M$ halts on $w$ then 
-\indent $L(N_{M,w}) = \{01,10\}$, thus $(N_{M,w}) \notin T$. We conclude that $(M,w) \in H_{TM}$ if and 
-\indent only if $f(M,w) \in T$. Therefore $f$ is a reduction from $H_{TM}$ to $T$. It follows that $T$ is 
-\indent undecidable as $H_{TM}$ is undecidable.
+\item Clearly, the function $f$ is computable. If $(M,w) \in H_{TM}$ or $M$ halts on $w$ then $L(N_{M,w}) = \{01,10\}$, thus $(N_{M,w}) \notin T$. 
+\item We conclude that $(M,w) \in H_{TM}$ if and only if $f(M,w) \in T$. 
+\item Therefore $f$ is a reduction from $H_{TM}$ to $T$. It follows that $T$ is undecidable as $H_{TM}$ is undecidable.
+\end{itemize}
 
 \indent $\Box$
 
-\pagebreak
+\question{7}{\textbf{Proof:}}
 
-\question{7}{Sipser, exercise 5.13}
-
-\textbf{Proof:}
-
-$ $
-
-We show that $USELESS_{TM}$ is undecidable by showing that $\overline{H_{TM}} \geq USELESS_{TM}$. 
-\indent The reduction function $f$ takes as input $(M,w)$ where $M$ is a Turing Machine and $w$ 
-\indent is a string, and outputs $f(M,w) = (N_{M,w})$, where $N_{M,w}$ is the Turing Machine that
-\indent does the following:
-
+\begin{itemize}
+\item We show that $USELESS_{TM}$ is undecidable by showing that $\overline{H_{TM}} \geq USELESS_{TM}$.
+\item The reduction function $f$ takes as input $(M,w)$ where $M$ is a Turing Machine and $w$ is a string. 
+\item $f$ outputs $f(M,w) = (N_{M,w})$, where $N_{M,w}$ is the Turing Machine that does the following:
  \begin{center}
   \begin{itemize}
     \item On input symbol $0$, $N_{M,w}$ simply enters all it's states except for a special state $\overline{q}$.
@@ -145,12 +166,12 @@ We show that $USELESS_{TM}$ is undecidable by showing that $\overline{H_{TM}} \g
   \end{itemize}
  \end{center}
 
-Clearly, the function $f$ is computable. From the behavior of  $N_{M,w}$ on input symbol $0$,
-\indent it is clear that only the special state $\overline{q}$ can be useless, and from the behavior of $N_{M,w}$
-\indent on input symbol 1, it is clear that $\overline{q}$ is useless if and only if $M$ does not halt  on $w$. 
-\indent Therefore $(M,w) \in \overline{H_{TM}}$ if and only if $f(M,w) \in USELESS_{TM}$, and hence f is a 
-\indent reduction from $\overline{H_{TM}}$ to $USELESS_{TM}$. It follows that $USELESS_{TM}$ is undecidable 
-\indent as $H_{TM}$ is undecidable.
+\item Clearly, the function $f$ is computable. 
+\item From the behavior of  $N_{M,w}$ on input symbol $0$, it is clear that only the special state $\overline{q}$ can be useless. 
+\item From the behavior of $N_{M,w}$  on input symbol 1, it is clear that $\overline{q}$ is useless if and only if $M$ does not halt on $w$.
+\item Therefore $(M,w) \in \overline{H_{TM}}$ if and only if $f(M,w) \in USELESS_{TM}$, and hence f is a reduction from $\overline{H_{TM}}$ to $USELESS_{TM}$. 
+\item It follows that $USELESS_{TM}$ is undecidable as $H_{TM}$ is undecidable.
+\end{itemize}
 
 \indent $\Box$
 
